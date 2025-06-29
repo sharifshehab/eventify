@@ -1,9 +1,13 @@
 
 const Home = () => {
     return (
-        <div>
-            <h1>home page</h1>
-        </div>
+        <main>
+            <section>
+                <div>
+                    home page
+                </div>
+            </section>
+        </main>
     );
 };
 
