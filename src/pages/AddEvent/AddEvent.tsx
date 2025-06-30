@@ -27,7 +27,8 @@ const AddEvent = () => {
         const eventData = {
             ...data, 
             AttendeeCount: 0,
-            organizer: user.email
+            organizer: user.email,
+            attendees: [],
         }
         const newEvent =await axiosPublic.post('/events/create-event', eventData);
         if (newEvent) {

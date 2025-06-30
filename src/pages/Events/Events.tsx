@@ -32,7 +32,7 @@ const Event = () => {
 
     return (
         <Container>
-            <div>
+            <div className="flex items-center justify-between gap-4">
                 <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} placeholders={placeholders}/>
                 <input type="datetime-local" value={dateValue} onChange={handleDateFilter}/>
             </div>{/* filter */}

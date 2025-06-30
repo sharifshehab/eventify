@@ -2,10 +2,22 @@ import { Button } from "@/components/ui/button";
 
 // react icons
 import { type IEventData } from "../../../../types";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
+import { useQueryClient } from "@tanstack/react-query";
 
-const SingleEvent = ({event}: { event: IEventData }) => {
-    const { _id, title, name, dateTime, location, description, AttendeeCount } = event || {}
+const SingleEvent = ({ event }: { event: IEventData }) => {
+    const axiosPublic = useAxiosPublic();
+    const queryClient = useQueryClient();
+    const { _id, title, name, dateTime, location, description, AttendeeCount, organizer } = event || {}
 
+      const handleAttendCount = async () => {
+          try {
+            await axiosPublic.patch(`events/event-attend/${_id}`, {organizer});
+            queryClient.invalidateQueries({queryKey: ["events"]});
+          } catch (err) {
+              console.log(err);
+         }
+        }
 
     return (
         <div className="w-full shadow-lg bg-white rounded">
@@ -29,7 +41,7 @@ const SingleEvent = ({event}: { event: IEventData }) => {
                     <h3>Location: {location}</h3>
                 </div>
 
-                <Button className="w-full">Join Event</Button>
+                <Button className="w-full" onClick={() =>handleAttendCount()}>Join Event</Button>
             </div>
         </div>
     );
