@@ -7,6 +7,7 @@ import Register from "@/pages/Register/Register";
 import { createBrowserRouter } from "react-router";
 import PrivateRoute from "./PrivateRoute";
 import UsersEvent from "@/pages/UsersEvent/UsersEvent";
+import EditEvent from "@/pages/EditEvent/EditEvent";
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,13 @@ const router = createBrowserRouter([
             {
                 path: "add-event",
                 element: <PrivateRoute><AddEvent></AddEvent></PrivateRoute>,
+            },
+            {
+                path: "edit-event/:eventId",
+                loader: async ({ params })=> {
+                    return fetch(`http://localhost:5000/events/event/${params.eventId}`);
+                },
+                element: <EditEvent/>,
             },
             {
                 path: "register",

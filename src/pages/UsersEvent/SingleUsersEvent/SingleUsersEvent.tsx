@@ -1,16 +1,41 @@
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import {type IEventData} from "../../../../types"
+import Swal from 'sweetalert2';
+import { Link } from "react-router";
 
 const SingleUsersEvent = ({ event }: { event: IEventData }) => {
     const axiosPublic = useAxiosPublic();
 
+    const { _id, title, name, dateTime, location, description, AttendeeCount } = event || {}
 
-
-    const { _id, title, name, dateTime, location, description, organizer: organizerEmail, AttendeeCount } = event || {}
-
-    const handleEventDelete = async (id: string) => {
-        await axiosPublic.delete(`/events/delete-event/${id}`);
-    }
+    const handleEventDelete = (id: string) => {
+        
+        Swal.fire({
+            title: "Are you sure you want to delete this event?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  axiosPublic.delete(`/events/delete-event/${id}`)
+                      .then(res => {
+                          if (res) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your event has been deleted.",
+                            icon: "success"
+                        });
+                    }
+                  }
+                    
+                )
+            }
+          });
+    };
+    
 
     return (
 
@@ -42,7 +67,7 @@ const SingleUsersEvent = ({ event }: { event: IEventData }) => {
             </div> {/* content */}
 
             <div className="space-x-4 basis-2xs bg-red-500">
-                <button>Update</button>
+                <button><Link to={`/edit-event/${_id}`}>Update</Link></button>
                 <button onClick={() => handleEventDelete(_id)}>Delete</button>
             </div>
             
