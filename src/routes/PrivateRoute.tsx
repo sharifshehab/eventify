@@ -4,9 +4,7 @@ import { Navigate, useLocation } from 'react-router';
 
 const PrivateRoute = ({children} : {children: ReactNode}) => {
     const {user} = useContext(AuthContext);
-
     const location = useLocation();
-
     if (user) {
         return children;
     }

@@ -4,15 +4,17 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { Input } from "@/components/ui/input";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
+import { useNavigate } from "react-router";
 
 const Register = () => {
     const axiosPublic = useAxiosPublic();
     const form = useForm();
+    const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<FieldValues> = async (userData) => {
         try {
-            const newUser = await axiosPublic.post('/users/create-user', userData); 
-            console.log(newUser);
+            await axiosPublic.post('/users/create-user', userData); 
+            navigate("/login");
         } catch (error) {
             console.log(error);
         }

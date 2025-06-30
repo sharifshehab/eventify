@@ -6,6 +6,7 @@ import Login from "@/pages/Login/Login";
 import Register from "@/pages/Register/Register";
 import { createBrowserRouter } from "react-router";
 import PrivateRoute from "./PrivateRoute";
+import UsersEvent from "@/pages/UsersEvent/UsersEvent";
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,13 @@ const router = createBrowserRouter([
             {
                 path: "events",
                 Component: Events,
+            },
+            {
+                path: "users-event/:userEmail",
+                loader: async ({ params })=> {
+                    return fetch(`http://localhost:5000/events/users-event/${params.userEmail}`);
+               },
+                Component: UsersEvent,
             },
             {
                 path: "add-event",

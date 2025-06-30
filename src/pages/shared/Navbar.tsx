@@ -1,5 +1,5 @@
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
  // react icons
 import { IoIosArrowUp} from "react-icons/io";
 import {TbLogout2} from "react-icons/tb";
@@ -14,7 +14,7 @@ import { AuthContext } from "@/contexts/ProviderContext";
 const Navbar = () => {
     const [accountMenuOpen, setAccountMenuOpen] = useState(false)
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-    const {user, logout} = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
 
     return (
         <header>
@@ -43,7 +43,7 @@ const Navbar = () => {
 
                 <li className="flex items-center dark:text-[#abc2d3] hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
                     <BiSupport className="text-[1.1rem] group-hover:text-[#3B9DF8] dark:text-[#abc2d3] text-gray-600"/>
-                    My Event
+                            <NavLink to={`/users-event/${user?.email}`}>My Event</NavLink>
                         </li>
                         
                 <li className="flex items-center dark:text-[#abc2d3] hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
