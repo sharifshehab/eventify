@@ -2,9 +2,11 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import {type IEventData} from "../../../../types"
 import Swal from 'sweetalert2';
 import { Link } from "react-router";
+import { useQueryClient } from "@tanstack/react-query";
 
 const SingleUsersEvent = ({ event }: { event: IEventData }) => {
     const axiosPublic = useAxiosPublic();
+    const queryClient = useQueryClient();
 
     const { _id, title, name, dateTime, location, description, AttendeeCount } = event || {}
 
@@ -22,12 +24,13 @@ const SingleUsersEvent = ({ event }: { event: IEventData }) => {
               if (result.isConfirmed) {
                   axiosPublic.delete(`/events/delete-event/${id}`)
                       .then(res => {
+                          queryClient.invalidateQueries({queryKey: ["usersEvent"]});
                           if (res) {
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your event has been deleted.",
-                            icon: "success"
-                        });
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your event has been deleted.",
+                                icon: "success"
+                            });
                     }
                   }
                     

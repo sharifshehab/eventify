@@ -32,13 +32,9 @@ const EditEvent = () => {
         }
     });
 
-
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        
-        const editEvent = await axiosPublic.patch(`events/edit-event/${_id}`, data);
+        await axiosPublic.patch(`events/edit-event/${_id}`, data);
         navigate(`/users-event/${organizer}`);
-
-        console.log(editEvent);
     }
 
     return (

@@ -39,7 +39,6 @@ const AddEvent = () => {
                 description: "",
             }); 
         }
-        console.log(newEvent);
     }
 
     return (

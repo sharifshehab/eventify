@@ -23,10 +23,7 @@ const router = createBrowserRouter([
                 Component: Events,
             },
             {
-                path: "users-event/:userEmail",
-                loader: async ({ params })=> {
-                    return fetch(`http://localhost:5000/events/users-event/${params.userEmail}`);
-               },
+                path: "users-event",
                 Component: UsersEvent,
             },
             {
