@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
  // react icons
 import { IoIosArrowUp} from "react-icons/io";
 import {TbLogout2} from "react-icons/tb";
@@ -8,11 +8,13 @@ import {BiSupport} from "react-icons/bi";
 import {FiUser} from "react-icons/fi";
 import Container from "@/components/layout/Container";
 import { NavLink } from "react-router";
+import { AuthContext } from "@/contexts/ProviderContext";
 
 
 const Navbar = () => {
     const [accountMenuOpen, setAccountMenuOpen] = useState(false)
-    const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
+    const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+    const {user, logout} = useContext(AuthContext);
 
     return (
         <header>
@@ -26,7 +28,7 @@ const Navbar = () => {
             <ul className="items-center gap-[20px] text-[1rem] text-[#424242] md:flex hidden">
                 <li className="flex items-center dark:text-[#abc2d3] hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
                     <BiSupport className="text-[1.1rem] group-hover:text-[#3B9DF8] dark:text-[#abc2d3] text-gray-600"/>
-                    <NavLink to={"/home"}>Home</NavLink>
+                    <NavLink to={"/"}>Home</NavLink>
                 </li>
 
                 <li className="flex items-center dark:text-[#abc2d3] hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
@@ -36,17 +38,31 @@ const Navbar = () => {
 
                 <li className="flex items-center dark:text-[#abc2d3] hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
                     <BiSupport className="text-[1.1rem] group-hover:text-[#3B9DF8] dark:text-[#abc2d3] text-gray-600"/>
-                            
-                            <NavLink to={"/add-event"}>Add Event</NavLink>
+                        <NavLink to={user? "/add-event" : "/login"}>Add Event</NavLink>
                 </li>
 
                 <li className="flex items-center dark:text-[#abc2d3] hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
                     <BiSupport className="text-[1.1rem] group-hover:text-[#3B9DF8] dark:text-[#abc2d3] text-gray-600"/>
                     My Event
+                        </li>
+                        
+                <li className="flex items-center dark:text-[#abc2d3] hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
+                    <BiSupport className="text-[1.1rem] group-hover:text-[#3B9DF8] dark:text-[#abc2d3] text-gray-600"/>
+                            
+                            <NavLink to={"/register"}>Register</NavLink>
+                        </li>
+                        
+                <li className="flex items-center dark:text-[#abc2d3] hover:text-[#3B9DF8] group gap-[5px] cursor-pointer">
+                    <BiSupport className="text-[1.1rem] group-hover:text-[#3B9DF8] dark:text-[#abc2d3] text-gray-600"/>
+                            <NavLink to={"/login"}>Login</NavLink>
                 </li>
             </ul>
 
-            {/* user account */}
+                    {/* user account */}
+                    {
+                        !user ? <NavLink to={"/login"}>Login</NavLink> :
+                            
+                   
             <div className="flex items-center gap-[15px]">
                 <div className="flex items-center gap-[10px] cursor-pointer relative"
                      onClick={() => setAccountMenuOpen(!accountMenuOpen)}>
@@ -68,10 +84,10 @@ const Navbar = () => {
      
 
                         <div className="mt-3 border-t dark:border-slate-700 border-gray-200 pt-[5px]">
-                            <p className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] dark:text-red-500 dark:hover:bg-red-500/20 text-red-500 hover:bg-red-50">
+                            <button onClick={() => logout()} className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] dark:text-red-500 dark:hover:bg-red-500/20 text-red-500 hover:bg-red-50">
                                 <TbLogout2/>
                                 Logout
-                            </p>
+                            </button>
                         </div>
 
                     </div>
@@ -83,7 +99,8 @@ const Navbar = () => {
 
                 <CiMenuFries onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
                              className="text-[1.8rem] dark:text-[#abc2d3] text-[#424242]c cursor-pointer md:hidden flex"/>
-            </div>
+                            </div>
+                     }
 
             {/* mobile sidebar */}
             <aside

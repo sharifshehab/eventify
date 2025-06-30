@@ -11,41 +11,42 @@ import { Input } from "@/components/ui/input";
 
 import { Textarea } from "@/components/ui/textarea";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import { useForm } from "react-hook-form";
+import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
 
 
 const AddEvent = () => {
-    const axiosSecure = useAxiosPublic();
+    const axiosPublic = useAxiosPublic();
 
-    interface IEventForm {
-        title: string;
-        name: string;
-        dateTime: string;
-        location: string;
-        description: string;
-    }
+    // const { isPending, isError, data: events = [], error } = useQuery({
+    //     queryKey: ['event'],
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get('/events/create-event')
+    //         return res;
+    //     }
+    // })
 
-    const form = useForm<IEventForm>();
 
-    const onSubmit = async (data: IEventForm) => {
+
+    const form = useForm();
+
+    const onSubmit: SubmitHandler<FieldValues>  = async (data) => {
         const eventData = {
             ...data, 
             AttendeeCount: 0,
             // user: userMail
         }
 
-        // const newEvent = await axiosSecure.post('/events/create-event', eventData);
+        const newEvent = await axiosPublic.post('/events/create-event', eventData);
 
-        console.log(eventData);
+        console.log(newEvent);
     }
 
     return (
         <main>
             <section>
                 <Container>
-               
                 <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className="flex gap-6">
             <FormField
             control={form.control}
