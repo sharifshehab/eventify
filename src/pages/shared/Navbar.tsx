@@ -8,6 +8,8 @@ import {FiUser} from "react-icons/fi";
 import Container from "@/components/layout/Container";
 import { NavLink } from "react-router";
 import { AuthContext } from "@/contexts/ProviderContext";
+import logo from "../../assets/logo.png";
+
 
 const Navbar = () => {
     const [accountMenuOpen, setAccountMenuOpen] = useState(false)
@@ -15,12 +17,15 @@ const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
 
     return (
-        <header className="bg-linear-to-r/decreasing from-indigo-500 to-teal-400 py-2">
+        <header className="bg-linear-to-r/decreasing from-indigo-500 to-teal-400 py-6">
             <Container>
                 <nav className="flex items-center justify-between w-full relative">
 
-            {/* logo */}
-            <img src="https://i.ibb.co/0BZfPq6/darklogo.png" alt="logo" className="w-[55px] "/>
+                    {/* logo */}
+                    <div className="flex items-center justify-center gap-1">
+                        <img src={logo} alt="logo" className="w-[36px] " />
+                        <h3 className="text-white uppercase text-[20px] underline decoration-cyan-300 underline-offset-4">ventify</h3>
+                    </div>
 
             {/* nav links */}
             <ul className="items-center gap-[20px] text-[1rem] text-white md:flex hidden">

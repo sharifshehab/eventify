@@ -43,13 +43,13 @@ const SingleUsersEvent = ({ event }: { event: IEventData }) => {
 
     return (
 
-        <div className="flex md:flex-row flex-col items-center justify-between gap-8 mt-16">
+        <div className="flex md:flex-row flex-col items-center justify-between gap-8 mt-10">
 
             <div className="basis-full w-full bg-white border-y-3 border-cyan-300 relative boxShadow flex sm:flex-row flex-col gap-[20px] p-4">
 
                 <div>
-                        <h1 className="text-[1.4rem] font-bold leading-[24px]">{title}</h1>
-                    <span className="text-[16px] text-cyan-400">{name}</span>
+                        <h1 className="text-2xl font-bold leading-[24px]">{title}</h1>
+                    <span className="text-[16px] text-cyan-400">Organizer: {name}</span>
         
                         <p className="text-gray-600 mt-3 text-[0.9rem]">{description}</p>
         
@@ -72,13 +72,3 @@ const SingleUsersEvent = ({ event }: { event: IEventData }) => {
 };
 
 export default SingleUsersEvent;
-
-/* 
-
-  
-
-
-○  Update(buton) 
-○  Delete(buton) 
-
-*/

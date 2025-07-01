@@ -26,7 +26,7 @@ const AddEvent = () => {
         const eventData = {
             ...data, 
             AttendeeCount: 0,
-            organizer: user.email,
+            organizer: user?.email,
             attendees: [],
         }
         const newEvent =await axiosPublic.post('/events/create-event', eventData);
@@ -88,7 +88,7 @@ const AddEvent = () => {
                 <FormItem className="w-full">
                 <FormLabel className="text-cyan-400">Date and Time</FormLabel>
                 <FormControl>
-                    <Input type="datetime-local" placeholder="Provide Date and Time" required {...field} className="rounded-sm"/>
+                    <Input type="datetime-local" placeholder="Provide Date and Time" required {...field} className="rounded-sm md:w-full w-60"/>
                 </FormControl>
                 </FormItem>
             )}/> {/* Date and Time */}

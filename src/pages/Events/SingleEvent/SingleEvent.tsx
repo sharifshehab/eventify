@@ -30,7 +30,7 @@ const SingleEvent = ({ event }: { event: IEventData }) => {
                 <h2 className="font-bold text-[20px]">
                         {title}
                         </h2>
-                <h4 className="text-[15px]">Organize: {name}</h4>
+                <h4 className="text-[15px]">Organizer: {name}</h4>
             </div>
             
             <div className="flex-grow">

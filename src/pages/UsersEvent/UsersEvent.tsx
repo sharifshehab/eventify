@@ -21,9 +21,9 @@ const UsersEvent = () => {
 
     return (
         <main>
-            <section>
+            <section className="min-h-screen">
                 <Container>
-                    <div>
+                    <div className="mt-24">
                         {usersEvent.length === 0 ?
                             <div className="flex items-center justify-center min-h-screen">
                                 <h2 className="text-center text-4xl">No event found!</h2>

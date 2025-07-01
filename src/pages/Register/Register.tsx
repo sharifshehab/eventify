@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import type { AxiosError } from "axios";
 import { useState } from "react";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router";
@@ -19,11 +18,11 @@ const Register = () => {
         try {
             await axiosPublic.post('/users/create-user', userData); 
             navigate("/login");
-        } catch (error) {
-            if ((error as AxiosError).response.data.error.code === 11000) {
+        } catch (error: any) {
+            if (error.response.data.error.code === 11000) {
                 setMailErrMessage("This email address already exists");
             }
-            setErrorMessage((error as AxiosError).response?.data?.error?.message);
+            setErrorMessage(error.response?.data?.error?.message);
         }
     }
 
@@ -31,15 +30,20 @@ const Register = () => {
         <main>
             <section>
                 <Container>
+                <div className="flex flex-col items-center justify-center min-h-screen">
+                  
+                  <div className="border-b-2 pb-2.5 border-cyan-300 mb-5">
+                      <h2 className="text-center mt-10 text-4xl text-black">User Registration</h2>
+                  </div>
                 <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 min-w-9/12">
         <div className="flex gap-6">
             <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
                 <FormItem className="w-full">
-                <FormLabel>Name</FormLabel>
+                <FormLabel className="text-cyan-400">Name</FormLabel>
                 <FormControl>
                     <Input type="text" placeholder="Write user name" required {...field}  className="peer bg-darkColor border-[#e5eaf2] border outline-none  pe-5 py-3 w-full focus:border-yellow-400 transition-colors duration-300"/>
                 </FormControl>
@@ -50,7 +54,7 @@ const Register = () => {
             name="email"
             render={({ field }) => (
                 <FormItem className="w-full">
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="text-cyan-400">Email</FormLabel>
                 <FormControl>
                     <Input type="email" placeholder="Write email address" required {...field}  />
                     </FormControl>
@@ -66,7 +70,7 @@ const Register = () => {
             name="password"
             render={({ field }) => (
                 <FormItem className="w-full">
-                <FormLabel>Password</FormLabel>
+                <FormLabel className="text-cyan-400">Password</FormLabel>
                 <FormControl>
                     <Input type="password" placeholder="Write password" required {...field} />
                     </FormControl>
@@ -78,7 +82,7 @@ const Register = () => {
             name="photoURL"
             render={({ field }) => (
                 <FormItem className="w-full">
-                <FormLabel>Photo</FormLabel>
+                <FormLabel className="text-cyan-400">Photo</FormLabel>
                 <FormControl>
                     <Input type="url" placeholder="Provide photo URL" required {...field}  />
                 </FormControl>
@@ -87,11 +91,12 @@ const Register = () => {
                                 
                     </div>{/* second-row */}
 
-        <Button type="submit">Register</Button>
+        <Button type="submit" className="bg-cyan-300 rounded-sm text-black hover:bg-cyan-200">Register</Button>
                         </form>
                         <p>Already have an account? <NavLink to={"/login"} className="underline font-medium">Login</NavLink></p>
 
-    </Form>
+                        </Form>
+                        </div>
                 </Container>
             </section>
         </main>

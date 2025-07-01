@@ -1,10 +1,7 @@
 export interface IAuthUser{
     name: string,
     email: string,
-    password: string,
     photoURL: string,
-    createdAt: string,
-    updatedAt: string,
     _id: string,
 }
 
