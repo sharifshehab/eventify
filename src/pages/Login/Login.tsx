@@ -4,11 +4,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { Input } from "@/components/ui/input";
 import { AuthContext } from "@/contexts/ProviderContext";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import { useContext } from "react";
+import type { AxiosError } from "axios";
+import { useContext, useState } from "react";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
-import { useLocation, useNavigate } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 
 const Login = () => {
+    const [errMessage, setErrMessage] = useState<string>();
     const axiosPublic = useAxiosPublic();
     const form = useForm();
     const { login } = useContext(AuthContext);
@@ -23,7 +25,7 @@ const Login = () => {
             login(user?.data?.data);
             navigate(from, {replace: true});
         } catch (error) {
-            console.log(error);
+            setErrMessage((error as AxiosError).response.data.message);
         }
     }
 
@@ -42,7 +44,8 @@ const Login = () => {
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                     <Input type="email" placeholder="Write your email" required {...field}  className="peer bg-darkColor border-[#e5eaf2] border outline-none  pe-5 py-3 w-full focus:border-yellow-400 transition-colors duration-300"/>
-                </FormControl>
+                    </FormControl>
+                    {errMessage && <p className="text-red-500">{errMessage}</p>}
                 </FormItem>
             )}/> {/* email */}
             <FormField
@@ -53,14 +56,16 @@ const Login = () => {
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                     <Input type="password" placeholder="Write your password" required {...field}  />
-                </FormControl>
+                    </FormControl>
+                    {errMessage && <p className="text-red-500">{errMessage}</p>}
                 </FormItem>
                 )} /> {/* password */}
                                 
                 </div>
     
         <Button type="submit">Login</Button>
-      </form>
+                        </form>
+        <p>Don't have an account? <NavLink to={"/register"} className="underline font-medium">Register</NavLink></p>
     </Form>
                 </Container>
             </section>

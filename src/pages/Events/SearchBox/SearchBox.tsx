@@ -38,7 +38,7 @@ const SearchBox = ({ placeholders, searchValue, setSearchValue }) => {
     }, [charIndex, isDeleting, placeholderIndex, searchValue, placeholders]);
 
     return (
-         <div className="relative w-full lg:w-[85%] border dark:border-slate-700 border-gray-300 rounded-lg">
+         <div className="relative w-full border border-cyan-300 rounded-sm">
             <CiSearch
                 className="absolute left-4 top-1/2 dark:text-slate-500 transform -translate-y-1/2 text-gray-400 text-[1.5rem]"/>
 

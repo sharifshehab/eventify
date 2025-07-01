@@ -20,11 +20,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "events",
-                Component: Events,
+                element: <PrivateRoute><Events/></PrivateRoute>,
             },
             {
                 path: "users-event",
-                Component: UsersEvent,
+                element: <PrivateRoute><UsersEvent/></PrivateRoute>,
             },
             {
                 path: "add-event",

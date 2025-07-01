@@ -20,7 +20,6 @@ const AddEvent = () => {
     const axiosPublic = useAxiosPublic();
     const { user } = useContext(AuthContext);
 
-
     const form = useForm();
 
     const onSubmit: SubmitHandler<FieldValues>  = async (data) => {
@@ -46,9 +45,13 @@ const AddEvent = () => {
         <main>
             <section>
                 <Container>
-                    
+                <div className="flex flex-col items-center justify-center min-h-screen">
+                  
+                  <div className="border-b-2 pb-2.5 border-cyan-300 mb-5">
+                      <h2 className="text-center mt-10 text-4xl text-black">Add Event</h2>
+                  </div>
                     <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
                             <div className="flex gap-6">
                         
             <FormField
@@ -56,9 +59,9 @@ const AddEvent = () => {
             name="title"
             render={({ field }) => (
                 <FormItem className="w-full">
-                <FormLabel>Event Title</FormLabel>
+                <FormLabel className="text-cyan-400">Event Title</FormLabel>
                 <FormControl>
-                    <Input type="text" placeholder="Write Title" required {...field}  className="peer bg-darkColor border-[#e5eaf2] border outline-none  pe-5 py-3 w-full focus:border-yellow-400 transition-colors duration-300"/>
+                    <Input type="text" placeholder="Write Title" required {...field}  className="rounded-sm"/>
                 </FormControl>
                 </FormItem>
                                         )} /> {/* title */}
@@ -68,9 +71,9 @@ const AddEvent = () => {
             name="name"
             render={({ field }) => (
                 <FormItem className="w-full">
-                <FormLabel>Author Name</FormLabel>
+                <FormLabel className="text-cyan-400">Name</FormLabel>
                 <FormControl>
-                    <Input type="text" placeholder="Write Name" required {...field}  />
+                    <Input type="text" placeholder="Write Name" required {...field} className="rounded-sm" />
                 </FormControl>
                 </FormItem>
                 )} /> {/* name */}
@@ -83,9 +86,9 @@ const AddEvent = () => {
             name="dateTime"
             render={({ field }) => (
                 <FormItem className="w-full">
-                <FormLabel>Date and Time</FormLabel>
+                <FormLabel className="text-cyan-400">Date and Time</FormLabel>
                 <FormControl>
-                    <Input type="datetime-local" placeholder="Provide Date and Time" required {...field} />
+                    <Input type="datetime-local" placeholder="Provide Date and Time" required {...field} className="rounded-sm"/>
                 </FormControl>
                 </FormItem>
             )}/> {/* Date and Time */}
@@ -94,9 +97,9 @@ const AddEvent = () => {
             name="location"
             render={({ field }) => (
                 <FormItem className="w-full">
-                <FormLabel>Location</FormLabel>
+                <FormLabel className="text-cyan-400">Location</FormLabel>
                 <FormControl>
-                    <Input type="text" placeholder="Write Location" required {...field}  />
+                    <Input type="text" placeholder="Write Location" required {...field}  className="rounded-sm"/>
                 </FormControl>
                 </FormItem>
                 )} /> {/* name */}
@@ -109,21 +112,20 @@ const AddEvent = () => {
             name="description"
             render={({ field }) => (
                 <FormItem className="w-full">
-                <FormLabel>Description</FormLabel>
+                <FormLabel className="text-cyan-400">Description</FormLabel>
                 <FormControl>
-                    <Textarea placeholder="Write description here."required {...field}/>
+                    <Textarea placeholder="Write description here."required {...field} className="rounded-sm"/>
                 </FormControl>
                 </FormItem>
             )}/> {/* description */}
             
         </div>{/* third-row */}
-                            
 
-
-        <Button type="submit">Add Event</Button>
+        <Button type="submit" className="bg-cyan-300 rounded-sm text-black hover:bg-cyan-200">Add Event</Button>
       </form>
                 
-    </Form>
+                        </Form>
+                        </div>
                  
                     </Container>
             </section>

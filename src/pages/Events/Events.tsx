@@ -4,7 +4,7 @@ import useAxiosPublic from "@/hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { type IEventData } from "../../../types";
 
-import {useState} from "react";
+import React, {useState} from "react";
 import SearchBox from "./SearchBox/SearchBox.js";
 
 const Event = () => {
@@ -25,18 +25,17 @@ const Event = () => {
         }
     });
 
-    const handleDateFilter = (e) => {
+    const handleDateFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDateValue(e.target.value)
     }
-    console.log(dateValue);
 
     return (
         <Container>
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex md:flex-row flex-col items-center justify-between gap-4 mt-16">
                 <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} placeholders={placeholders}/>
-                <input type="datetime-local" value={dateValue} onChange={handleDateFilter}/>
+                <input type="datetime-local" className="border p-4 rounded-sm" value={dateValue} onChange={handleDateFilter}/>
             </div>{/* filter */}
-            <div className="grid grid-cols-4 gap-8 justify-items-center">
+            <div className="grid lg:grid-cols-4 grid-cols-1 gap-8 justify-items-center mt-10">
                         {events.length === 0 ?
                             <div className="flex items-center justify-center min-h-screen">
                                 <h2 className="text-center text-4xl">No event found!</h2>

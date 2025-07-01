@@ -17,7 +17,7 @@ const SingleUsersEvent = ({ event }: { event: IEventData }) => {
             text: "You won't be able to revert this!",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#53d5ff",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
           }).then((result) => {
@@ -29,7 +29,8 @@ const SingleUsersEvent = ({ event }: { event: IEventData }) => {
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your event has been deleted.",
-                                icon: "success"
+                                icon: "success",
+                                confirmButtonColor: "#53d5ff",
                             });
                     }
                   }
@@ -42,36 +43,28 @@ const SingleUsersEvent = ({ event }: { event: IEventData }) => {
 
     return (
 
-        <div className="flex items-center justify-between gap-8">
+        <div className="flex md:flex-row flex-col items-center justify-between gap-8 mt-16">
 
-             <div className="basis-full w-full bg-slate-800 relative boxShadow rounded-xl flex sm:flex-row flex-col gap-[20px] p-4">
-            
-            <div className="basis-2xl">
-                <img
-                    src="https://img.freepik.com/free-photo/close-up-portrait-handsome-young-hipster-man-hazel-eyes-wearing-trendy-plaid-shirt-posing-near-city-cafe_291049-1495.jpg?t=st=1722616951~exp=1722620551~hmac=88c27af52ea53d69a3f15a046cd8f7fe8c8036a5c733e1e1449b78bc68aeef24&w=360"
-                    alt="image"
-                    className="w-full h-[200px] object-cover"
-                />
-            </div>
-    
-            <div className="basis-full">
-                    <h1 className="text-[1.4rem] dark:text-[#abc2d3] font-bold leading-[24px]">{title}</h1>
-                <span className="text-[0.9rem] text-gray-400">{name}</span>
-    
-                    <p className="text-gray-600 mt-3 dark:text-[#abc2d3]/90 text-[0.9rem]">{description}</p>
-    
-                    <div className="flex gap-x-4">
-                        <p className="text-gray-600 mt-3 dark:text-[#abc2d3]/90 text-[0.9rem] bg-amber-600">{location}</p>
-                        <p className="text-gray-600 mt-3 dark:text-[#abc2d3]/90 text-[0.9rem] bg-amber-600">{ dateTime}</p>
-                        <p className="text-gray-600 mt-3 dark:text-[#abc2d3]/90 text-[0.9rem] bg-amber-600">{AttendeeCount}</p>
-                    </div>
-            </div>
-                
+            <div className="basis-full w-full bg-white border-y-3 border-cyan-300 relative boxShadow flex sm:flex-row flex-col gap-[20px] p-4">
+
+                <div>
+                        <h1 className="text-[1.4rem] font-bold leading-[24px]">{title}</h1>
+                    <span className="text-[16px] text-cyan-400">{name}</span>
+        
+                        <p className="text-gray-600 mt-3 text-[0.9rem]">{description}</p>
+        
+                        <div className="flex gap-x-4 text-sm">
+                            <p className="mt-3 bg-cyan-300 px-2"><span className="font-semibold">Location:</span> {location}</p>
+                            <p className="mt-3 bg-cyan-300 px-2"><span className="font-semibold">Date & Time:</span> {dateTime}</p>
+                            <p className="mt-3 bg-cyan-300 px-2"><span className="font-semibold">Attendee Count:</span> {AttendeeCount}</p>
+                        </div>
+                </div>
             </div> {/* content */}
 
-            <div className="space-x-4 basis-2xs bg-red-500">
-                <button><Link to={`/edit-event/${_id}`}>Update</Link></button>
-                <button onClick={() => handleEventDelete(_id)}>Delete</button>
+            <div className="space-x-4 flex items-center">
+                    <button className="bg-teal-300 p-1 hover:bg-teal-200"><Link to={`/edit-event/${_id}`}>Update</Link></button>
+                    
+                    <button className="bg-red-400 p-1 cursor-pointer hover:bg-red-300" onClick={() => handleEventDelete(_id)}>Delete</button>
             </div>
             
        </div>

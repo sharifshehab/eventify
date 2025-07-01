@@ -3,20 +3,27 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
+import type { AxiosError } from "axios";
+import { useState } from "react";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
 const Register = () => {
     const axiosPublic = useAxiosPublic();
     const form = useForm();
     const navigate = useNavigate();
+    const [errMessage, setErrorMessage] = useState();
+    const [mailErrMessage, setMailErrMessage] = useState<string>();
 
     const onSubmit: SubmitHandler<FieldValues> = async (userData) => {
         try {
             await axiosPublic.post('/users/create-user', userData); 
             navigate("/login");
         } catch (error) {
-            console.log(error);
+            if ((error as AxiosError).response.data.error.code === 11000) {
+                setMailErrMessage("This email address already exists");
+            }
+            setErrorMessage((error as AxiosError).response?.data?.error?.message);
         }
     }
 
@@ -46,7 +53,8 @@ const Register = () => {
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                     <Input type="email" placeholder="Write email address" required {...field}  />
-                </FormControl>
+                    </FormControl>
+                    {mailErrMessage && <p className="text-red-500">{mailErrMessage}</p>}
                 </FormItem>
                 )} /> {/* email */}
                                 
@@ -61,7 +69,8 @@ const Register = () => {
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                     <Input type="password" placeholder="Write password" required {...field} />
-                </FormControl>
+                    </FormControl>
+                   {errMessage && <p className="text-red-500">{errMessage}</p>}
                 </FormItem>
             )}/> {/* password */}
             <FormField
@@ -79,7 +88,9 @@ const Register = () => {
                     </div>{/* second-row */}
 
         <Button type="submit">Register</Button>
-      </form>
+                        </form>
+                        <p>Already have an account? <NavLink to={"/login"} className="underline font-medium">Login</NavLink></p>
+
     </Form>
                 </Container>
             </section>

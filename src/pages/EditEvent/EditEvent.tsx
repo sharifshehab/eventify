@@ -41,84 +41,89 @@ const EditEvent = () => {
         <main>
             <section>
                 <Container>
-                    
-                    <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                            <div className="flex gap-6">
-                        
-            <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-                <FormItem className="w-full">
-                <FormLabel>Event Title</FormLabel>
-                <FormControl>
-                    <Input type="text" placeholder="Write Title" required {...field}  className="peer bg-darkColor border-[#e5eaf2] border outline-none  pe-5 py-3 w-full focus:border-yellow-400 transition-colors duration-300"/>
-                </FormControl>
-                </FormItem>
-                                        )} /> {/* title */}
+                    <div className="flex flex-col items-center justify-center min-h-screen">
+                  
+                        <div className="border-b-2 pb-2.5 border-cyan-300">
+                            <h2 className="text-center mt-10 text-4xl text-black">Update Event</h2>
+                        </div>
+                        <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full mt-6">
+                                <div className="flex gap-6">
+                            
+                <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                    <FormItem className="w-full">
+                    <FormLabel className="text-cyan-400">Event Title</FormLabel>
+                    <FormControl>
+                        <Input type="text" placeholder="Write Title" required {...field} className="rounded-sm"/>
+                    </FormControl>
+                    </FormItem>
+                                            )} /> {/* title */}
+                                        
+                <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                    <FormItem className="w-full">
+                    <FormLabel className="text-cyan-400">Name</FormLabel>
+                    <FormControl>
+                        <Input type="text" placeholder="Write Name" required {...field}  className="rounded-sm"/>
+                    </FormControl>
+                    </FormItem>
+                    )} /> {/* name */}
                                     
-            <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-                <FormItem className="w-full">
-                <FormLabel>Author Name</FormLabel>
-                <FormControl>
-                    <Input type="text" placeholder="Write Name" required {...field}  />
-                </FormControl>
-                </FormItem>
-                )} /> {/* name */}
+                                </div>{/* first-row */}
                                 
-                            </div>{/* first-row */}
-                            
-        <div className="flex gap-6">
-            <FormField
-            control={form.control}
-            name="dateTime"
-            render={({ field }) => (
-                <FormItem className="w-full">
-                <FormLabel>Date and Time</FormLabel>
-                <FormControl>
-                    <Input type="datetime-local" placeholder="Provide Date and Time" required {...field} />
-                </FormControl>
-                </FormItem>
-            )}/> {/* Date and Time */}
-            <FormField
-            control={form.control}
-            name="location"
-            render={({ field }) => (
-                <FormItem className="w-full">
-                <FormLabel>Location</FormLabel>
-                <FormControl>
-                    <Input type="text" placeholder="Write Location" required {...field}  />
-                </FormControl>
-                </FormItem>
-                )} /> {/* name */}
+            <div className="flex gap-6">
+                <FormField
+                control={form.control}
+                name="dateTime"
+                render={({ field }) => (
+                    <FormItem className="w-full">
+                    <FormLabel className="text-cyan-400">Date and Time</FormLabel>
+                    <FormControl>
+                        <Input type="datetime-local" placeholder="Provide Date and Time" required {...field} className="rounded-sm"/>
+                    </FormControl>
+                    </FormItem>
+                )}/> {/* Date and Time */}
+                <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                    <FormItem className="w-full">
+                    <FormLabel className="text-cyan-400">Location</FormLabel>
+                    <FormControl>
+                        <Input type="text" placeholder="Write Location" required {...field}  className="rounded-sm"/>
+                    </FormControl>
+                    </FormItem>
+                    )} /> {/* name */}
+                                    
+                                </div>{/* second-row */}
                                 
-                            </div>{/* second-row */}
-                            
-        <div className="">
-            <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-                <FormItem className="w-full">
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                    <Textarea placeholder="Write description here."required {...field}/>
-                </FormControl>
-                </FormItem>
-            )}/> {/* description */}
-            
-        </div>{/* third-row */}
-                            
-        <Button type="submit">Edit Event</Button>
-      </form>
+            <div className="">
+                <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                    <FormItem className="w-full">
+                    <FormLabel className="text-cyan-400">Description</FormLabel>
+                    <FormControl>
+                        <Textarea placeholder="Write description here."required {...field} className="rounded-sm"/>
+                    </FormControl>
+                    </FormItem>
+                )}/> {/* description */}
+                
+            </div>{/* third-row */}
+                                
+            <Button type="submit" className="bg-cyan-300 rounded-sm text-black hover:bg-cyan-200">Update Event</Button>
+        </form>
 
-    </Form>
-                 
-                    </Container>
+                        </Form>
+                        </div>
+                        
+                </Container>
             </section>
         </main>
     );
