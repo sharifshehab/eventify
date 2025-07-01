@@ -8,6 +8,7 @@ import { createBrowserRouter } from "react-router";
 import PrivateRoute from "./PrivateRoute";
 import UsersEvent from "@/pages/UsersEvent/UsersEvent";
 import EditEvent from "@/pages/EditEvent/EditEvent";
+import Error from "@/pages/Error/Error";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,11 @@ const router = createBrowserRouter([
             },
         ]
     },
+    {
+        path: "*",
+        element: <Error/>
+    }
+    
     
 ]);
 

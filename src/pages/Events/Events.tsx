@@ -15,7 +15,7 @@ const Event = () => {
     const [dateValue, setDateValue] = useState("");
 
     const axiosPublic = useAxiosPublic();
-    const { data:events = [] } = useQuery({
+    const { data:events = [],isLoading } = useQuery({
         queryKey: ["events", searchValue, dateValue],
         queryFn: async () => {
             const res = await axiosPublic.get(`/events/all-events?search=${searchValue}&date=${dateValue}`);
@@ -31,6 +31,10 @@ const Event = () => {
 
     const handleDateFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDateValue(e.target.value)
+    }
+
+    if (isLoading) {
+        <h1>Loading Data...</h1>
     }
 
     return (
@@ -70,8 +74,8 @@ const Event = () => {
             </div>{/* filters */}
             <div className="grid lg:grid-cols-4 grid-cols-1 gap-8 justify-items-center mt-24">
                         {events.length === 0 ?
-                            <div className="flex items-center justify-center min-h-screen">
-                                <h2 className="text-center text-4xl">No event found!</h2>
+                            <div className="flex justify-center-safe min-h-screen">
+                                <h2 className="text-4xl">No event found!</h2>
                             </div> :
                             events.map((event: IEventData) => <SingleEvent key={event._id} event={event}></SingleEvent>)
                 }                
